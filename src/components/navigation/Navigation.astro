@@ -16,9 +16,9 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
 
 <div x-data="{ isOpen: false }" @keydown.escape="isOpen = false">
   <!-- Header -->
-  <header class="fixed inset-x-0 top-0 z-[100] bg-white/80 backdrop-blur-md border-b border-neutral-200">
+  <header class="fixed inset-x-0 top-0 z-[200] bg-white/80 backdrop-blur-md border-b border-neutral-200 safe-top">
     <div class="max-w-7xl mx-auto">
-      <nav class="flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6 lg:px-8">
+      <nav class="flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6 lg:px-8 relative">
         <!-- Logo -->
         <a href="/" class="flex items-center gap-2 shrink-0">
           <Image 
@@ -61,7 +61,7 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
         <!-- Mobile Menu Button -->
         <button
           type="button"
-          class="md:hidden relative z-50 p-2 text-neutral-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+          class="md:hidden absolute right-4 top-1/2 -translate-y-1/2 z-[201] p-2 text-neutral-600 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
           @click="isOpen = !isOpen"
           :aria-expanded="isOpen"
           aria-label="Menu"
@@ -89,7 +89,7 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
   <div 
     class="fixed inset-0 bg-white/95 backdrop-blur-sm md:hidden transition-all duration-500"
     :class="{'opacity-100 pointer-events-auto': isOpen, 'opacity-0 pointer-events-none': !isOpen}"
-    style="z-index: 90;"
+    style="z-index: 199;"
   >
     <div 
       class="flex flex-col justify-end h-full pb-safe px-6"
@@ -170,6 +170,13 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
 
   nav::-webkit-scrollbar-thumb:hover {
     background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  /* Add these styles */
+  @supports (padding: env(safe-area-inset-top)) {
+    .safe-top {
+      padding-top: env(safe-area-inset-top);
+    }
   }
 </style>
 
