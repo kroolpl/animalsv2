@@ -5,7 +5,7 @@ import heroImage from '../../images/dog1.jpg';
 
 <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
   <!-- Background Image -->
-  <div class="absolute inset-0 z-0">
+  <div class="absolute inset-0 z-[1]">
     <Image
       src={heroImage}
       alt="Pies w sklepie zoologicznym"
@@ -16,7 +16,7 @@ import heroImage from '../../images/dog1.jpg';
   </div>
 
   <!-- Content -->
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+  <div class="relative z-[2] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
     <h1 class="text-4xl md:text-6xl font-bold mb-6 font-display">
       Profesjonalny sklep zoologiczny<br/>
       <span class="text-emerald-400">w Głogowie</span>
@@ -41,7 +41,7 @@ import heroImage from '../../images/dog1.jpg';
   </div>
 
   <!-- Scroll Indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce z-[2]">
     <svg 
       class="w-6 h-6 text-white" 
       fill="none" 
