@@ -12,8 +12,8 @@ const navItems = [
 const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoologiczny-61554985716749/';
 ---
 
-<header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200">
-  <div class="max-w-7xl mx-auto w-screen">
+<header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200 safe-top">
+  <div class="max-w-7xl mx-auto w-full">
     <nav class="flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6 lg:px-8">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 shrink-0">
@@ -167,6 +167,13 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
   #mobile-menu-toggle[aria-expanded="true"] .mobile-menu-icon {
     @apply scale-90;
     d: path("M6 18L18 6M6 6l12 12");
+  }
+
+  /* Add these new styles */
+  @supports (padding: env(safe-area-inset-top)) {
+    .safe-top {
+      padding-top: env(safe-area-inset-top);
+    }
   }
 </style>
 
