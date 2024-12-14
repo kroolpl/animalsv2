@@ -13,10 +13,10 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
 ---
 
 <header class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200">
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-7xl mx-auto w-screen">
     <nav class="flex items-center justify-between h-16 sm:h-20 px-4 sm:px-6 lg:px-8">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2">
+      <a href="/" class="flex items-center gap-2 shrink-0">
         <Image 
           src={logo} 
           alt="Animals" 
@@ -24,7 +24,7 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
           width={48}
           height={48}
         />
-        <span class="text-2xl sm:text-3xl font-display font-bold text-emerald-700 group-hover:text-emerald-600 transition-colors duration-300">
+        <span class="text-xl sm:text-3xl font-display font-bold text-emerald-700 truncate">
           ANIMALS
         </span>
       </a>
@@ -57,7 +57,7 @@ const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoo
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-toggle"
-        class="md:hidden relative z-50 p-2 -mr-2"
+        class="md:hidden relative z-50 p-2 shrink-0"
         aria-label="Menu"
         aria-expanded="false"
       >
