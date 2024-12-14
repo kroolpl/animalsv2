@@ -4,13 +4,13 @@ import logo from '../images/logo.svg';
 import Navigation from './navigation/Navigation.astro';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<header class="fixed top-0 inset-x-0 z-50 bg-white/95 backdrop-blur-md border-b border-neutral-200">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <nav class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3">
+      <a href="/" class="flex items-center gap-2 shrink-0">
         <Image src={logo} alt="Animals" class="h-12 w-auto breathing" />
-        <span class="text-3xl font-display font-bold text-emerald-800">Animals</span>
+        <span class="text-xl sm:text-3xl font-display font-bold text-emerald-800 truncate">Animals</span>
       </a>
 
       <Navigation />
