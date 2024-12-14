@@ -1,7 +1,24 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+// Define the article data structure
+interface ArticleData {
+  title: string;
+  description: string;
+  pubDate: Date;
+  author: string;
+  image: {
+    src: string;
+    alt: string;
+  };
+}
 
 export async function getStaticPaths() {
   const articles = await getCollection('articles');
@@ -11,11 +28,11 @@ export async function getStaticPaths() {
   }));
 }
 
-const { article } = Astro.props;
+const { article } = Astro.props as Props;
 const { Content } = await article.render();
 
 // Import image dynamically
-const images = import.meta.glob('/src/images/**/*.{jpeg,jpg,png,gif}') as Record<string, () => Promise<{ default: ImageMetadata }>>;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/images/**/*.{jpeg,jpg,png,gif}');
 const imagePath = `/src/images/${article.data.image.src.replace(/^\/images\//, '')}`;
 const imageModule = await images[imagePath]();
 ---

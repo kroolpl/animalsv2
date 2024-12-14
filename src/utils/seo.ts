@@ -31,7 +31,7 @@ export const defaultSEO: SEOProps = {
       { name: "googlebot", content: "index, follow" },
       { name: "format-detection", content: "telephone=no" },
       {
-        type: "application/ld+json",
+        name: "application/ld+json",
         content: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "PetStore",
