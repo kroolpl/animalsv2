@@ -146,14 +146,14 @@ declare module 'astro:content' {
   slug: "naturalne-przysmaki";
   body: string;
   collection: "articles";
-  data: any
+  data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
 "naturalne-przysmaki2.md": {
 	id: "naturalne-przysmaki2.md";
   slug: "naturalne-przysmaki2";
   body: string;
   collection: "articles";
-  data: any
+  data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
 };
 
@@ -165,5 +165,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("../../src/content/config.js");
 }
