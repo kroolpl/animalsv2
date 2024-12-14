@@ -1,0 +1,115 @@
+<div 
+  id="certificate-modal" 
+  class="fixed inset-0 z-[100] bg-black/90 hidden items-center justify-center p-4 overflow-y-auto"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <div class="min-h-screen px-4 py-8 w-full flex items-center justify-center">
+    <div class="relative bg-transparent rounded-lg w-full max-w-5xl mx-auto">
+      <button 
+        id="close-modal" 
+        class="absolute -top-12 right-0 text-white hover:text-emerald-400 transition-colors p-2 rounded-full hover:bg-white/10"
+        aria-label="Zamknij podgląd certyfikatu"
+      >
+        <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+      <div class="flex items-center justify-center">
+        <img 
+          id="modal-image" 
+          src="" 
+          alt="Podgląd certyfikatu" 
+          class="max-w-full max-h-[80vh] w-auto h-auto object-contain mx-auto opacity-0 transition-opacity duration-300 rounded-lg" 
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #modal-image {
+    margin: 0 auto;
+  }
+</style>
+
+<script is:inline>
+  window.addEventListener('load', () => {
+    const modal = document.getElementById('certificate-modal');
+    const modalImg = document.getElementById('modal-image');
+    const closeBtn = document.getElementById('close-modal');
+    let isOpen = false;
+
+    function open(imgSrc) {
+      if (!modal || !modalImg) return;
+      
+      modalImg.src = imgSrc;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      
+      // Trigger fade-in animation
+      requestAnimationFrame(() => {
+        modalImg.classList.add('opacity-100');
+      });
+      
+      isOpen = true;
+      closeBtn?.focus();
+    }
+
+    function close() {
+      if (!modal || !modalImg) return;
+      
+      modalImg.classList.remove('opacity-100');
+      
+      // Wait for fade-out animation
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        modalImg.src = '';
+        isOpen = false;
+      }, 300);
+
+      // Return focus to the last clicked certificate
+      const lastClickedCert = document.querySelector('.certificate-preview:focus');
+      if (lastClickedCert) {
+        lastClickedCert.focus();
+      }
+    }
+
+    // Event Listeners
+    closeBtn?.addEventListener('click', close);
+    
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) close();
+    });
+
+    // Certificate click handlers
+    const certificateImages = document.querySelectorAll('.certificate-preview');
+    certificateImages.forEach(img => {
+      img.addEventListener('click', () => {
+        const imgElement = img.querySelector('img');
+        if (imgElement?.src) {
+          open(imgElement.src);
+        }
+      });
+
+      // Keyboard support
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const imgElement = img.querySelector('img');
+          if (imgElement?.src) {
+            open(imgElement.src);
+          }
+        }
+      });
+    });
+  });
+</script> 

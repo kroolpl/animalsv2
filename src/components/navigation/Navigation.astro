@@ -1,0 +1,242 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../images/logo1.svg';
+
+const navItems = [
+  { name: 'Strona główna', href: '/' },
+  { name: 'Moja pasja', href: '/moja-pasja' },
+  { name: 'Porady', href: '/porady' },
+  { name: 'Kontakt', href: '/kontakt' }
+];
+
+const FACEBOOK_URL = 'https://www.facebook.com/p/Animals-Profesjonalny-Sklep-Zoologiczny-61554985716749/';
+---
+
+<header class="fixed top-0 left-0 right-0 z-[50] bg-white border-b border-neutral-200 shadow-sm" id="main-header">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-3 group">
+        <Image 
+          src={logo} 
+          alt="Animals" 
+          class="h-12 w-auto logo-hover"
+          width={48}
+          height={48}
+        />
+        <span class="text-2xl sm:text-3xl font-display font-bold text-emerald-700 group-hover:text-emerald-600 transition-colors duration-300">
+          ANIMALS
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8">
+        {navItems.map((item) => (
+          <a 
+            href={item.href}
+            class="group relative py-2 text-base font-medium text-neutral-700 hover:text-emerald-600 transition-colors duration-300"
+          >
+            {item.name}
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-emerald-600 scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100"></span>
+          </a>
+        ))}
+        
+        <a 
+          href={FACEBOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-[#1877F2] hover:text-[#0d6efd] transition-all duration-300 p-2.5 rounded-full hover:bg-blue-50"
+          aria-label="Odwiedź nasz profil na Facebooku"
+        >
+          <svg class="w-5 h-5 fill-current transform hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden inline-flex items-center justify-center w-12 h-12 text-neutral-800 hover:text-emerald-600 hover:bg-emerald-50/80 transition-all duration-300 rounded-lg"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Menu mobilne"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path class="mobile-menu-icon transition-all duration-300" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div
+  id="mobile-menu"
+  class="md:hidden fixed inset-0 z-[100] bg-black/30 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300"
+  aria-hidden="true"
+  role="dialog"
+>
+  <div class="absolute right-0 top-0 bottom-0 w-[300px] bg-white shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out">
+    <div class="h-16 sm:h-20 px-4 border-b border-neutral-200 flex items-center justify-between">
+      <span class="font-display text-xl">Menu</span>
+      <button
+        class="p-2 text-neutral-800 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+        onclick="document.getElementById('mobile-menu-toggle').click()"
+        aria-label="Zamknij menu"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    
+    <nav class="h-[calc(100%-4rem)] sm:h-[calc(100%-5rem)] overflow-y-auto">
+      <ul class="px-4 py-6 space-y-2">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="block w-full px-4 py-3 text-base font-medium text-neutral-800 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+        <li class="pt-4 mt-4 border-t border-neutral-100">
+          <a
+            href={FACEBOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 px-4 py-3 text-base font-medium text-[#1877F2] hover:text-[#0d6efd] hover:bg-blue-50 rounded-lg transition-colors"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Facebook
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<style>
+  /* Logo animation */
+  .logo-hover {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  .logo-hover:hover {
+    transform: scale(1.08) rotate(5deg);
+    animation-play-state: paused;
+  }
+
+  @keyframes breathe {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.03);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  /* Mobile menu enhancements */
+  #mobile-menu[aria-hidden="false"] {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  #mobile-menu[aria-hidden="false"] > div {
+    @apply translate-x-0;
+  }
+
+  /* Improved hamburger animation */
+  #mobile-menu-toggle[aria-expanded="true"] .mobile-menu-icon {
+    @apply scale-90;
+    d: path("M6 18L18 6M6 6l12 12");
+  }
+</style>
+
+<script>
+  class MobileNavigation {
+    private toggle: HTMLButtonElement | null;
+    private menu: HTMLElement | null;
+    private menuLinks: NodeListOf<HTMLAnchorElement>;
+    private isOpen: boolean = false;
+    
+    constructor() {
+      this.toggle = document.querySelector('#mobile-menu-toggle');
+      this.menu = document.querySelector('#mobile-menu');
+      this.menuLinks = document.querySelectorAll('#mobile-menu a');
+      
+      if (this.toggle && this.menu) {
+        this.initialize();
+      }
+    }
+
+    private initialize(): void {
+      this.setupEventListeners();
+    }
+
+    private setupEventListeners(): void {
+      // Toggle menu
+      this.toggle?.addEventListener('click', () => this.toggleMenu());
+
+      // Close menu when clicking on links
+      this.menuLinks.forEach(link => {
+        link.addEventListener('click', () => this.closeMenu());
+      });
+
+      // Close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.closeMenu();
+        }
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        const target = e.target as Element;
+        if (this.isOpen && 
+            !this.menu?.contains(target) && 
+            !this.toggle?.contains(target)) {
+          this.closeMenu();
+        }
+      });
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768 && this.isOpen) {
+          this.closeMenu();
+        }
+      });
+    }
+
+    private toggleMenu(): void {
+      this.isOpen = !this.isOpen;
+      this.updateMenuState();
+    }
+
+    private closeMenu(): void {
+      this.isOpen = false;
+      this.updateMenuState();
+    }
+
+    private updateMenuState(): void {
+      if (!this.toggle || !this.menu) return;
+
+      this.toggle.setAttribute('aria-expanded', this.isOpen.toString());
+      this.menu.setAttribute('aria-hidden', (!this.isOpen).toString());
+      
+      // Manage body scroll
+      document.body.style.overflow = this.isOpen ? 'hidden' : '';
+    }
+  }
+
+  // Initialize mobile navigation
+  new MobileNavigation();
+</script>

@@ -1,0 +1,32 @@
+---
+import Button from './ui/Button.astro';
+import { Image } from 'astro:assets';
+import dogWinterImage from '../images/dog_winter.jpg';
+---
+
+<section class="relative h-[90vh] flex items-center">
+  <div class="absolute inset-0 z-0">
+    <Image
+      src={dogWinterImage}
+      alt="Dog in winter scenery"
+      class="w-full h-full object-cover"
+      quality={80}
+    />
+    <div class="absolute inset-0 bg-black/40"></div>
+  </div>
+  
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6">
+      Najlepsze dla Twojego
+      <span class="text-emerald-400">Pupila</span>
+    </h1>
+    <p class="text-xl md:text-2xl mb-8 max-w-2xl">
+      Oferujemy szeroki wybór karm premium i akcesoriów dla psów i kotów. 
+      Profesjonalne doradztwo i przyjazna atmosfera.
+    </p>
+    <div class="flex gap-4">
+      <Button href="/produkty">Zobacz produkty</Button>
+      <Button href="/kontakt" variant="secondary">Skontaktuj się</Button>
+    </div>
+  </div>
+</section>

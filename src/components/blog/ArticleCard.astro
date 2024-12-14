@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+const { title, description, pubDate, image } = article.data;
+
+// Import image dynamically
+const images = import.meta.glob('/src/images/**/*.{jpeg,jpg,png,gif}') as Record<string, () => Promise<{ default: ImageMetadata }>>;
+const imagePath = `/src/images/${image.src.replace(/^\/images\//, '')}`;
+const imageModule = await images[imagePath]();
+---
+
+<article class="bg-white rounded-2xl shadow-sm overflow-hidden">
+  <div class="aspect-w-16 aspect-h-9">
+    <Image 
+      src={imageModule.default}
+      alt={image.alt}
+      width={800}
+      height={400}
+      class="w-full h-full object-cover"
+    />
+  </div>
+  <div class="p-6">
+    <h3 class="text-xl font-bold mb-2">
+      <a href={`/porady/${article.slug}`} class="hover:text-emerald-600 transition-colors">
+        {title}
+      </a>
+    </h3>
+    <p class="text-neutral-600 mb-4">{description}</p>
+    <time datetime={pubDate.toISOString()} class="text-sm text-neutral-500">
+      {pubDate.toLocaleDateString('pl-PL', { dateStyle: 'long' })}
+    </time>
+  </div>
+</article> 

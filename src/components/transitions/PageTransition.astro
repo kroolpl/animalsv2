@@ -1,0 +1,59 @@
+---
+---
+
+<script>
+  import Swup from 'swup';
+  import SwupScrollPlugin from '@swup/scroll-plugin';
+  import SwupHeadPlugin from '@swup/head-plugin';
+  import SwupSlideTheme from '@swup/slide-theme';
+  import SwupPreloadPlugin from '@swup/preload-plugin';
+
+  const swup = new Swup({
+    plugins: [
+      new SwupScrollPlugin({
+        animateScroll: {
+          betweenPages: true,
+          samePageWithHash: true,
+          samePage: true
+        }
+      }),
+      new SwupHeadPlugin(),
+      new SwupPreloadPlugin(),
+      new SwupSlideTheme({
+        mainElement: '#swup',
+        reversed: false,
+        animationSelector: '[class*="transition-"]',
+        timing: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+        duration: 320,
+      })
+    ],
+    containers: ['#swup'],
+    cache: true,
+    animateHistoryBrowsing: true,
+    linkSelector: 'a[href^="/"]:not([data-no-swup]), a[href^="' + window.location.origin + '"]:not([data-no-swup])',
+  });
+</script>
+
+<style is:global>
+  .transition-main {
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+
+  html.is-animating .transition-main {
+    transform: translateX(100px) scale(0.98);
+    opacity: 0;
+  }
+
+  html.is-leaving .transition-main {
+    transform: translateX(-100px) scale(0.98);
+    opacity: 0;
+  }
+
+  /* Progress bar styles */
+  .swup-progress-bar {
+    height: 3px;
+    background-color: #10b981; /* emerald-500 */
+  }
+</style>

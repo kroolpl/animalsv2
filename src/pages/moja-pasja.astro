@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import aboutImage from '../images/about-hero.jpg';
+import founderImage from '../images/founder.jpg';
+import cert1 from '../images/cert1.jpg';
+import cert2 from '../images/cert2.jpg';
+import cert3 from '../images/cer3.jpg';
+import CertificateModal from '../components/CertificateModal.astro';
+
+
+const values = [
+  {
+    icon: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z',
+    title: 'Pasja i zaangażowanie',
+    description: 'Każdego dnia z miłością dbam o potrzeby Waszych pupili'
+  },
+  {
+    icon: 'M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18',
+    title: 'Profesjonalna wiedza',
+    description: 'Nieustannie poszerzam wiedzę i kompetencje'
+  },
+  {
+    icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z',
+    title: 'Indywidualne podejście',
+    description: 'Każdy pupil jest dla mnie wyjątkowy'
+  }
+];
+---
+
+<Layout 
+  title="Moja pasja | ANIMALS® - Z miłości do zwierząt"
+  description="Poznaj historię ANIMALS® - miejsca, gdzie profesjonalna wiedza łączy się z prawdziwą miłością do zwierząt. Dowiedz się więcej o naszej misji i wartościach."
+>
+  {/* Hero Section */}
+  <div class="relative h-[60vh] lg:h-[70vh] flex items-center justify-center overflow-hidden">
+    <Image
+      src={aboutImage}
+      alt="Szczęśliwe zwierzęta"
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">
+        O mnie
+      </h1>
+      <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto">
+        Pasja, która stała się sposobem na życie.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Founder Section */}
+    <div class="py-24">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="relative">
+          <div class="absolute -top-4 -left-4 w-72 h-72 bg-emerald-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+          <div class="absolute -bottom-8 -right-4 w-72 h-72 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+          <div class="relative">
+            <Image
+              src={founderImage}
+              alt="Założycielka ANIMALS®"
+              class="rounded-2xl shadow-2xl w-full"
+            />
+            <div class="absolute -bottom-6 -right-6 bg-white px-6 py-4 rounded-xl shadow-lg border-2 border-emerald-100">
+              <p class="text-2xl font-bold text-emerald-800">10+</p>
+              <p class="text-emerald-600">Lat doświadczenia</p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-8">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-700 text-sm font-medium">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            O właścicielce
+          </div>
+          <div>
+            <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent">
+              Z miłości do zwierząt
+            </h2>
+            <div class="prose prose-lg text-neutral-700">
+              <p>
+                Od dziecka miałam bzika na punkcie zwierząt – wychowywałam się z kundelkiem, a teraz moją wierną towarzyszką jest Nuka, owczarek belgijski, z którym spędzam każdy dzień od 6 lat.
+            </p>
+            <p>
+              Skończyłam zootechnikę we Wrocławiu i od 10 lat zajmuję się tym zawodowo ��� to więcej niż praca, to pasja!
+            </p>
+            <p>
+              W moim sklepie znajdziesz super karmy i akcesoria – wszystko starannie wybrane. Doradzam też za darmo, jeśli chodzi o żywienie zwierzaków. Zapraszam do mojego sklepu na Starym Mieście w Głogowie!
+            </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Certificates Section */}
+    <div class="py-24 border-t border-neutral-200 scroll-mt-20" id="certificates">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent">
+          Certyfikaty i kwalifikacje
+        </h2>
+        <p class="mt-4 text-lg text-neutral-600 max-w-2xl mx-auto">
+          Nieustannie poszerzam swoją wiedzę, aby zapewnić najlepszą opiekę i doradztwo dla Waszych pupili
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
+        {[cert1, cert2, cert3,].map((certificate, index) => (
+          <div 
+            class="certificate-preview group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+            role="button"
+            tabindex="0"
+            aria-label={`Otwórz podgląd certyfikatu ${index + 1}`}
+          >
+            <div class="relative aspect-[4/3] overflow-hidden">
+              <Image
+                src={certificate}
+                alt={`Certyfikat ${index + 1}`}
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <p class="text-white text-sm font-medium">Kliknij aby powiększyć</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Values Section */}
+    <div class="py-24 border-t border-neutral-200">
+      <h2 class="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent">
+        Moje wartości
+      </h2>
+      <div class="grid md:grid-cols-3 gap-12">
+        {values.map((value) => (
+          <div class="group">
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-neutral-200 hover:border-emerald-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+              <div class="p-3 bg-emerald-50 rounded-lg w-fit mb-6 group-hover:bg-emerald-100 transition-colors">
+                <svg 
+                  class="w-8 h-8 text-emerald-600" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path 
+                    stroke-linecap="round" 
+                    stroke-linejoin="round" 
+                    stroke-width="1.5" 
+                    d={value.icon}
+                  />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold mb-3">{value.title}</h3>
+              <p class="text-neutral-600">{value.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Mission Statement */}
+    <div class="py-24 border-t border-neutral-200 text-center">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-4xl font-bold mb-8 bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent">
+          Moja misja
+        </h2>
+        <p class="text-xl text-neutral-700 mb-12">
+          W ANIMALS chodzi o coś więcej niż tylko karmy i zabawki. Chcę pomagać Wam budować silną więź z Waszymi pupilami. Każdy produkt w moim sklepie wybieram z myślą o zdrowiu, komforcie i radości Waszych zwierzaków.
+        </p>
+        <div class="inline-flex items-center gap-2 text-emerald-700 font-medium">
+          <span class="font-display text-lg">Z miłości do zwierząt,</span>
+          <span class="font-bold">Magdalena Radziejewska</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Add this to your existing styles */
+    section, div[class*="py-"] {
+      scroll-margin-top: 5rem; /* 80px - matches navbar height */
+    }
+
+    @media (min-width: 640px) {
+      section, div[class*="py-"] {
+        scroll-margin-top: 6rem; /* 96px for larger screens */
+      }
+    }
+  </style>
+
+  <CertificateModal />
+</Layout>

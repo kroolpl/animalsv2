@@ -1,0 +1,83 @@
+---
+import { Image } from 'astro:assets';
+import dog1 from '../../images/dog1.jpg';
+import dog2 from '../../images/dog2.jpg';
+import cat1 from '../../images/cat1.jpg';
+
+const testimonials = [
+  {
+    image: dog1,
+    name: 'Luna',
+    type: 'Golden Retriever, 3 lata',
+    text: '"Muszę przyznać, że te przysmaki są po prostu nieziemskie! A uwierzcie mi, próbowałam już kapci właściciela i były znacznie gorsze."',
+    rating: '🦴🦴🦴🦴🦴'
+  },
+  {
+    image: cat1,
+    name: 'Mruczek',
+    type: 'Kot brytyjski, 4 lata',
+    text: '"Normalnie nie piszę recenzji, bo jestem kotem i mam to w nosie, ale te zabawki... są całkiem spoko. Prawie tak dobre jak pudełko, w którym przyszły."',
+    rating: '🐟🐟🐟🐟🐟'
+  },
+  {
+    image: dog2,
+    name: 'Max',
+    type: 'Jack Russell Terrier, 2 lata',
+    text: '"Odkąd mój człowiek kupuje tu karmę, mam więcej energii na kopanie dziur w ogrodzie. Polecam każdemu aktywnemu psu!"',
+    rating: '🦴🦴🦴🦴🦴'
+  }
+];
+---
+
+<section class="py-24 bg-gradient-to-b from-neutral-50 to-white relative overflow-hidden">
+  <!-- Decorative elements -->
+  <div class="absolute -top-4 -left-4 w-72 h-72 bg-emerald-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+  <div class="absolute -bottom-8 -right-4 w-72 h-72 bg-emerald-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold mb-6 bg-gradient-to-r from-emerald-600 to-emerald-800 bg-clip-text text-transparent">
+        A co mówią moi klienci? 🐾
+      </h2>
+      <p class="text-xl text-neutral-600">
+        Autentyczne (prawie) recenzje od Waszych zwierzaków
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map(({ image, name, type, text, rating }) => (
+        <div class="group">
+          <div class="bg-white p-8 rounded-xl shadow-sm border border-neutral-200 hover:border-emerald-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg relative">
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2">
+              <div class="p-1 bg-white rounded-full shadow-sm">
+                <Image 
+                  src={image} 
+                  alt={name}
+                  width={64}
+                  height={64}
+                  class="w-16 h-16 rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            </div>
+            <div class="pt-8">
+              <p class="text-neutral-600 italic mb-6">{text}</p>
+              <div class="flex items-center justify-between pt-4 border-t border-neutral-100">
+                <div>
+                  <h4 class="font-semibold text-neutral-900">{name}</h4>
+                  <p class="text-sm text-neutral-500">{type}</p>
+                </div>
+                <div class="text-lg">{rating}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-sm text-neutral-400 italic">
+        * Wszystkie recenzje zostały przetłumaczone z języka szczekania i miauczenia na polski
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+---
+import { featuredProducts } from '../data/products';
+import ProductCard from './ui/ProductCard.astro';
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-neutral-900 mb-4">Polecane produkty</h2>
+      <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
+        Oferujemy szeroki wybór najlepszych karm i akcesoriów dla Twojego pupila
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {featuredProducts.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+  </div>
+</section>

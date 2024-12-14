@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HomePageSections from '../components/sections/HomePageSections.astro';
+import { defaultSEO } from '../utils/seo';
+---
+
+<Layout 
+  title={defaultSEO.title}
+  description={defaultSEO.description}
+>
+  <HomePageSections />
+</Layout>

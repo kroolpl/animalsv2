@@ -1,0 +1,143 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map(article => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+
+// Import image dynamically
+const images = import.meta.glob('/src/images/**/*.{jpeg,jpg,png,gif}') as Record<string, () => Promise<{ default: ImageMetadata }>>;
+const imagePath = `/src/images/${article.data.image.src.replace(/^\/images\//, '')}`;
+const imageModule = await images[imagePath]();
+---
+
+<Layout 
+  title={`${article.data.title} | Your Site Name`}
+  description={article.data.description}
+>
+  <article class="max-w-3xl mx-auto px-4 pt-32 pb-16">
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+        {article.data.title}
+      </h1>
+      <div class="flex gap-4 items-center justify-center text-neutral-600">
+        <span class="font-medium">{article.data.author}</span>
+        <span>•</span>
+        <time datetime={article.data.pubDate.toISOString()} class="text-sm">
+          {article.data.pubDate.toLocaleDateString('pl-PL', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })}
+        </time>
+      </div>
+    </header>
+
+    {imageModule && (
+      <div class="mb-12">
+        <Image 
+          src={imageModule.default}
+          alt={article.data.image.alt}
+          width={1200}
+          height={600}
+          class="w-full aspect-[2/1] object-cover rounded-2xl shadow-lg"
+        />
+        {article.data.image.alt && (
+          <p class="text-sm text-center text-neutral-500 mt-2 italic">
+            {article.data.image.alt}
+          </p>
+        )}
+      </div>
+    )}
+
+    <div class="prose prose-lg max-w-none">
+      <style is:inline>
+        .prose {
+          --tw-prose-body: theme('colors.neutral.600');
+          --tw-prose-headings: theme('colors.neutral.900');
+          --tw-prose-links: theme('colors.emerald.600');
+          --tw-prose-links-hover: theme('colors.emerald.700');
+          --tw-prose-underline: theme('colors.emerald.500 / 0.2');
+          --tw-prose-underline-hover: theme('colors.emerald.500');
+          --tw-prose-bold: theme('colors.neutral.900');
+          --tw-prose-counters: theme('colors.neutral.900');
+          --tw-prose-bullets: theme('colors.neutral.900');
+          --tw-prose-hr: theme('colors.neutral.200');
+          --tw-prose-quote-borders: theme('colors.emerald.500');
+          --tw-prose-captions: theme('colors.neutral.500');
+          --tw-prose-code: theme('colors.neutral.900');
+          --tw-prose-pre-code: theme('colors.neutral.200');
+          --tw-prose-pre-bg: theme('colors.neutral.800');
+          --tw-prose-th-borders: theme('colors.neutral.300');
+          --tw-prose-td-borders: theme('colors.neutral.200');
+        }
+
+        .prose :where(h2):not(:where([class~="not-prose"] *)) {
+          margin-top: 2.5em;
+          margin-bottom: 1em;
+          font-size: 1.75em;
+          line-height: 1.3;
+        }
+
+        .prose :where(h3):not(:where([class~="not-prose"] *)) {
+          margin-top: 2em;
+          margin-bottom: 0.8em;
+          font-size: 1.375em;
+          line-height: 1.4;
+        }
+
+        .prose :where(p):not(:where([class~="not-prose"] *)) {
+          margin-top: 1.25em;
+          margin-bottom: 1.25em;
+          line-height: 1.75;
+        }
+
+        .prose :where(ul):not(:where([class~="not-prose"] *)) {
+          margin-top: 1.25em;
+          margin-bottom: 1.25em;
+          padding-left: 1.625em;
+        }
+
+        .prose :where(li):not(:where([class~="not-prose"] *)) {
+          margin-top: 0.5em;
+          margin-bottom: 0.5em;
+        }
+
+        .prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+          margin-top: 2em;
+          margin-bottom: 2em;
+          padding-left: 1.5em;
+          font-style: italic;
+          border-left-width: 0.25rem;
+          border-left-color: var(--tw-prose-quote-borders);
+          font-size: 1.125em;
+          line-height: 1.6;
+          color: var(--tw-prose-bold);
+        }
+      </style>
+      <Content />
+    </div>
+
+    <!-- Article Footer -->
+    <footer class="mt-16 pt-8 border-t border-neutral-200">
+      <div class="flex items-center justify-between text-sm text-neutral-500">
+        <a href="/porady" class="flex items-center gap-2 hover:text-emerald-600 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Wróć do listy artykułów
+        </a>
+        <span>Udostępnij:</span>
+      </div>
+    </footer>
+  </article>
+</Layout> 

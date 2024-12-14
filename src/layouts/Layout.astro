@@ -1,0 +1,76 @@
+---
+import '@fontsource/lato';
+import '@fontsource/playfair-display';
+import { SEO } from 'astro-seo';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageTransition from '../components/transitions/PageTransition.astro';
+import type { SEOProps } from '../utils/seo';
+import { defaultSEO } from '../utils/seo';
+import Navigation from '../components/navigation/Navigation.astro';
+
+interface Props extends SEOProps {}
+
+const { 
+  title = defaultSEO.title, 
+  description = defaultSEO.description,
+  ...seoProps
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL('/images/og-image.jpg', Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <SEO
+      {...defaultSEO}
+      {...seoProps}
+      title={title}
+      description={description}
+      canonical={canonicalURL.toString()}
+      openGraph={{
+        ...defaultSEO.openGraph,
+        basic: {
+          ...defaultSEO.openGraph?.basic,
+          url: canonicalURL.toString(),
+          image: ogImageURL.toString(),
+        }
+      }}
+    />
+  </head>
+  <body class="min-h-screen bg-neutral-50 text-neutral-900">
+    <PageTransition />
+    <Navigation />
+    <main id="swup" class="transition-main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --font-primary: 'Lato', sans-serif;
+    --font-display: 'Playfair Display', serif;
+  }
+  
+  html {
+    font-family: var(--font-primary);
+    scroll-behavior: smooth;
+  }
+  
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+
+  /* Swup Transitions */
+  .transition-main {
+    opacity: 1;
+  }
+</style>

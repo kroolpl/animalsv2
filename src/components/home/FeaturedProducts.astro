@@ -1,0 +1,19 @@
+---
+import { featuredProducts } from '../../data/products';
+import ProductCard from '../ui/ProductCard.astro';
+import SectionContainer from '../ui/SectionContainer.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+---
+
+<SectionContainer background="white" id="polecane-produkty">
+  <SectionHeader
+    title="Polecane produkty"
+    description="Szeroki wybór wyselekcjonowanych karm i akcesoriów dla Twojego pupila"
+  />
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    {featuredProducts.map((product) => (
+      <ProductCard product={product} />
+    ))}
+  </div>
+</SectionContainer>

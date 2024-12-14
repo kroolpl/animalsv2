@@ -1,0 +1,35 @@
+{
+  "name": "pet-food-shop",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/ts-plugin": "^1.10.4",
+    "@fontsource/lato": "^5.0.17",
+    "@fontsource/playfair-display": "^5.0.17",
+    "@swup/fade-theme": "^2.0.1",
+    "@swup/head-plugin": "^2.3.1",
+    "@swup/preload-plugin": "^3.2.11",
+    "@swup/scroll-plugin": "^3.3.2",
+    "@swup/slide-theme": "^2.0.1",
+    "@xexiu/astro-modal": "^0.5.9",
+    "astro": "^4.1.1",
+    "astro-icon": "^1.1.4",
+    "astro-seo": "^0.8.4",
+    "iconify-icon": "^2.2.0",
+    "sharp": "^0.33.1",
+    "swup": "^4.8.1",
+    "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^20.10.6"
+  }
+}
