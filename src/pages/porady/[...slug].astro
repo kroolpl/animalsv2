@@ -24,22 +24,11 @@ const imageModule = await images[imagePath]();
   title={`${article.data.title} | Your Site Name`}
   description={article.data.description}
 >
-  <article class="max-w-3xl mx-auto px-4 pt-32 pb-16">
-    <header class="mb-12 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-        {article.data.title}
-      </h1>
-      <div class="flex gap-4 items-center justify-center text-neutral-600">
-        <span class="font-medium">{article.data.author}</span>
-        <span>•</span>
-        <time datetime={article.data.pubDate.toISOString()} class="text-sm">
-          {article.data.pubDate.toLocaleDateString('pl-PL', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </time>
-      </div>
+  <article itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 itemprop="headline">{article.data.title}</h1>
+      <meta itemprop="datePublished" content={article.data.pubDate.toISOString()} />
+      <meta itemprop="author" content={article.data.author} />
     </header>
 
     {imageModule && (

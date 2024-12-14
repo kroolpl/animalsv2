@@ -26,7 +26,34 @@ export const defaultSEO: SEOProps = {
       { name: "geo.region", content: "PL-DŚ" },
       { name: "geo.placename", content: "Głogów" },
       { name: "geo.position", content: "51.6621;16.0846" },
-      { name: "ICBM", content: "51.6621, 16.0846" }
+      { name: "ICBM", content: "51.6621, 16.0846" },
+      { name: "robots", content: "index, follow" },
+      { name: "googlebot", content: "index, follow" },
+      { name: "format-detection", content: "telephone=no" },
+      {
+        type: "application/ld+json",
+        content: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "PetStore",
+          "name": SITE_NAME,
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Polska 5",
+            "addressLocality": "Głogów",
+            "addressRegion": "Dolnośląskie",
+            "postalCode": "67-200",
+            "addressCountry": "PL"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "51.6621",
+            "longitude": "16.0846"
+          },
+          "openingHoursSpecification": [
+            // Add your business hours
+          ]
+        })
+      }
     ],
     link: [
       { rel: "icon", href: "/favicon.ico" }

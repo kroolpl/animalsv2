@@ -34,6 +34,12 @@ const ogImageURL = new URL('/images/og-image.jpg', Astro.site);
       title={title}
       description={description}
       canonical={canonicalURL.toString()}
+      languageAlternates={[
+        {
+          hrefLang: 'pl',
+          href: canonicalURL.toString()
+        }
+      ]}
       openGraph={{
         ...defaultSEO.openGraph,
         basic: {
